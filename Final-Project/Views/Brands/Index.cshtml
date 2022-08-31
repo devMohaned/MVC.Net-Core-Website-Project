@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Final_Project.Models.Brand>
+
+@{
+    ViewData["Title"] = "Brands";
+}
+
+
+@*Style Create Btn*@
+@*<head>
+    <style>
+        create-btn{
+            background-color: red; 
+        }
+    </style>
+</head>
+*@
+
+<h1 class="text-center" >View All Brands</h1>
+
+<p style="margin-bottom: 20px;">
+    <a asp-action="Create" class="btn-lg border border-5 border-warning">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>
+            <th>
+                Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Category.CategoryName)
+            </td>
+            <td >
+                <a class="btn-lg border border-5 border-warning " asp-action="Edit" asp-route-id="@item.BrandId">Edit</a> 
+@*  |              <a asp-action="Delete" asp-route-id="@item.BrandId">Delete</a>
+*@            </td>
+        </tr>
+}
+    </tbody>
+</table>

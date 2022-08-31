@@ -1,0 +1,471 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Molla - Bootstrap eCommerce Template" />
+    <meta name="author" content="p-themes" />
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/images/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/images/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/images/icons/site.html" />
+    <link
+      rel="mask-icon"
+      href="assets/images/icons/safari-pinned-tab.svg"
+      color="#666666"
+    />
+    <link rel="shortcut icon" href="assets/images/icons/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="Molla" />
+    <meta name="application-name" content="Molla" />
+    <meta name="msapplication-TileColor" content="#cc9966" />
+    <meta
+      name="msapplication-config"
+      content="assets/images/icons/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  
+    <link
+      rel="stylesheet"
+      href="assets/css/plugins/owl-carousel/owl.carousel.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/css/plugins/magnific-popup/magnific-popup.css"
+    />
+    <!-- Main CSS File -->
+    <link 
+        rel="stylesheet" href="/assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="assets/css/plugins/nouislider/nouislider.css"
+    />
+
+
+
+    <style>
+      
+          /* Category */
+.category-container {
+    padding: 4px;
+}
+
+    .category-container:hover {
+        cursor: pointer;
+    }
+
+        .category-container:hover img {
+            transform: scale(1.1);
+            transition: all 1s ease-in-out;
+        }
+
+    .category-container img {
+        object-fit: cover;
+    }
+
+.rounded-circle {
+    height: 180px;
+    width: 180px;
+}
+
+
+/* Features */
+
+.features-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 4px;
+}
+
+.features-icon {
+  height: 64px;
+  width: 64px;
+}
+
+
+.product-image{
+    min-height: 250px;
+    max-height:250px;
+    object-fit: cover;
+}
+
+
+
+
+
+/* Banner */
+.banner {
+  height: 600px;
+}
+
+div.d-flex div div.container-fluid img {
+  object-fit: cover;
+  height: 500px;
+  width: 100%;
+  margin-top: 36px;
+}
+
+.wrapper {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+}
+
+.wrapper img {
+  display: block;
+  max-width: 100%;
+}
+
+.wrapper .overlay {
+  margin-top: 36px;
+  padding-left: 10%;
+  position: absolute;
+  top: 0;
+  height: 90%;
+  width: 60%;
+  /*   background-color: rgba(0, 0, 0, 0.25);
+ */
+  color: white;
+}
+
+.banner-btn {
+  width: 70%;
+}
+
+
+.banner-title {
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.banner-text-color{
+    color:white;
+}
+.banner-text-lg{
+    font-size:2.5rem;
+}
+.banner-text-md{
+    font-size:2rem;
+}
+.banner-text-sm{
+    font-size:1.5rem;
+}
+
+
+    </style>
+
+   
+  </head>
+
+  <body>
+      <!-- Mobile Search Bar  -->
+
+
+              <!-- Banners -->
+    <section id="bannersId" class="gradient" >
+
+   
+
+        <div class="d-flex flex-wrap align-items-center justify-content-center pb-3 mb-5">
+            <div class="col-md-6">
+                <div class="container-fluid wrapper">
+                    <img src="assets/images/banner_tablet.jpg" alt="">
+                    <div class="d-flex flex-column  overlay py-5" > 
+                        <h1 class="banner-text-lg banner-text-color col banner-title">Just In
+                            <h3 class="banner-text-lg banner-text-color col col mt-0 banner-subtitle" >Take Your <br>Mobile<br>Anywhere</h3>
+                        </h2>
+                        <h4  class="banner-text-md banner-text-color col col mt-2 banner-detail">Get a Mobile Deal
+                        </h4>
+                        <a  href="~/categorylist/Index/2?name=Mobile" class="banner-text-lg banner-text-color col btn banner-btn text-center text-uppercase">buy now</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 ">
+                <div class="container-fluid  wrapper">
+                    <img src="assets/images/sale_pc.jpg" alt="" />
+                       <div class="d-flex flex-column  overlay py-5" > 
+                        <h1 class="banner-text-lg banner-text-color  col mt-0 banner-title">Used Products
+                            <h3 class="banner-text-lg banner-text-color col col mt-0 banner-subtitle" >Amazing <br>Cut off Prices<br>Drop </h3>
+                        </h2>
+                        <h4  class="banner-text-md banner-text-color col col mt-2 banner-detail">Electronic
+                        </h4>
+                        <a  href="~/categorylist/Index/4?name=Electronics" class="banner-text-lg banner-text-color col btn banner-btn text-center text-uppercase">buy now</a>
+                    </div>
+                    
+        
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- End of Banners -->
+    <div class="page-wrapper">
+      <main class="main">
+        <div class="page-content">
+
+     
+
+
+
+
+              <section id="categoryId">
+
+                     <h2 class="title text-center mb-2 mt-2">Shop By Category</h2>
+
+                <div class="d-flex flex-wrap align-items-center justify-content-center mb-2 py-3">
+        
+                  
+                  
+                       <a asp-controller="home" asp-action="catlist" asp-route-cat="2" asp-route-catname="Mobile">
+
+                    <div  class="m-4 category-container">
+                        <img src="assets/images/category/smart_phones.jpg" class="rounded-circle" alt="Smart Phones & Tablets">
+                        <h4 class="my-3 text-center">Mobile</p>
+        
+                    </div>
+                               </a>
+
+                                         <a asp-controller="home" asp-action="catlist" asp-route-cat="3" asp-route-catname="Vehicles">
+  <div class="m-4 category-container">
+                        <img src="assets/images/category/cars.jpg" class="rounded-circle" alt="Vehicles">
+                        <h4 class="my-3 text-center">Vehicles</p>
+        
+                    </div>
+                                       </a>
+
+                                          <a asp-controller="home" asp-action="catlist" asp-route-cat="4" asp-route-catname="Electronics">
+ <div class="m-4 category-container">
+                        <img src="assets/images/category/microwave.jpg" class="rounded-circle" alt="Electronics">
+                        <h4 class="my-3 text-center">Electronics</p>
+        
+                    </div>
+                                       </a>
+
+                                         <a asp-controller="home" asp-action="catlist" asp-route-cat="5" asp-route-catname="Fashion">
+  <div class="m-4 category-container">
+                        <img src="assets/images/category/banner-1.jpg" class="rounded-circle" alt="Fashion">
+                        <h4 class="my-3 text-center">Fashion</p>
+        
+                    </div>
+                                       </a>
+
+                                           <a asp-controller="home" asp-action="catlist" asp-route-cat="6" asp-route-catname="Furnitures">
+<div class="m-4 category-container">
+                        <img src="assets/images/category/furnitures.jpg" class="rounded-circle" alt="Furnitures">
+                        <h4 class="my-3 text-center">Furnitures</p>
+        
+                    </div>
+                                       </a>
+        
+                </div>
+        
+        
+        
+        
+                <div class="p-3  "></div>
+        
+            </section>
+            
+             <!-- Features -->
+
+    <section id="featuresId">
+
+        <div class="container-fluid mb-5 mt-5 py-3">
+
+
+
+            <div class="d-flex flex-wrap align-items-center justify-content-center mb-2 py-3">
+
+                <div class="p-2">
+                    <div class="d-flex  ">
+                        <img class="features-icon" src="assets/images/ic_price.png" alt="">
+                        <span class="features-title ">Variety of Prices Guaranteed</span>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2">
+                    <div class="d-flex  ">
+                        <img class="features-icon" src="assets/images/ic_offer.png" alt="">
+                        <span class="features-title "> Offers From Anywhere</span>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2">
+                    <div class="d-flex">
+                        <img class="features-icon" src="assets/images/ic_24_hrs.png" alt="">
+                        <span class="features-title "> Available To You 24/7</span>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2">
+                    <div class="d-flex">
+                        <img class="features-icon" src="assets/images/ic_brand.png" alt="">
+                        <span class="features-title ">Buy Products From Seller</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="p-3  gradient "></div>
+
+    </section>
+    <!-- End of Features -->
+
+
+             <h2 class="title text-center mb-4">You May Also Like</h2>
+            <!-- End .title text-center -->
+
+            <div
+              class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow mb-5"
+              data-toggle="owl"
+              data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'
+            >
+
+            @foreach(var item in @Model.adList)
+            {
+                        
+              <div class="product product-7 text-center">
+                <figure class="product-media">
+                  <a asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId">
+                    <img
+                      src="@item.AdMainImage"
+                      alt="Product image"
+                      class="product-image"
+                    />
+                  </a>
+
+                      
+
+                 
+
+                  <div class="product-action">
+                    <a asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId" class="btn-product"
+                      ><span>View Product</span></a
+                    >
+                  </div>
+                  <!-- End .product-action -->
+                </figure>
+                <!-- End .product-media -->
+
+                <div class="product-body">
+                  <div class="product-cat">
+                    <a href="#">@item._Category.CategoryName</a>
+                  </div>
+                  <!-- End .product-cat -->
+                  <h3 class="product-title">
+                    <a href="product"
+                      >@item.AdTitle</a
+                    >
+                  </h3>
+                  <!-- End .product-title -->
+                  <div class="product-price">$@item.AdPrice</div>
+                  <!-- End .product-price -->
+                 
+                </div>
+                <!-- End .product-body -->
+              </div>
+              <!-- End .product -->
+                    }
+
+           
+            </div>
+            <!-- End .owl-carousel -->
+
+        </div>
+        <!-- End .page-content -->
+      </main>
+      <!-- End .main -->
+    </div>
+    <!-- End .page-wrapper -->
+  
+
+ 
+
+    <!-- Plugins JS File -->
+@*    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.elevateZoom.min.js"></script>
+    <script src="assets/js/bootstrap-input-spinner.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>*@
+    <!-- Main JS File -->
+@*    <script src="assets/js/main.js"></script>
+*@  
+</body>
+
+  <!-- molla/product.html  22 Nov 2019 09:55:05 GMT -->
+</html>
+
+
+

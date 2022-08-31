@@ -1,0 +1,170 @@
+﻿@model List<Ad>
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+<div class="container">
+
+     @foreach (var item in Model){
+    
+
+                <div class="products mt-2 mb-2">
+                    <div class="product product-list">
+                        <div class="row">
+                            <div class="col">
+                                <figure class="product-media" style="background:white;">
+                                           <a asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId">
+             <img src="@item.AdMainImage" style="height:150px;width:150px; margin:auto; " />
+                            </a>
+
+                                </figure><!-- End .product-media -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+
+                            <div class="col">
+                                <div class="product-body product-action-inner">
+                                   
+                                   
+                                    <h3 class="product-title mr-5">               <a  asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId" >@item.AdTitle</a>
+</h3><!-- End .product-title -->
+                                             <p class="">   @item.AdBrief</p>
+ <div class="product-price">$@item.AdPrice</div><!-- End .product-price -->
+
+                                </div><!-- End .product-body -->
+                            </div><!-- End .col-lg-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product -->
+              
+        </div>
+
+        <!-- End .row -->
+    }
+</div>
+
+
+   
+
+
+
+<div class="main">
+    @*<div class="container d-flex justify-content-center ">
+        <table class="table caption-top">
+  
+  <thead>
+    <tr>
+      <th scope="col-4" class="col-4">Ads</th>
+      <th scope="col-6" class="col-5"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+   
+
+    </div><!---------end container-->
+    *@
+<div class="col-md-12">
+    <nav aria-label="Page navigation">
+        <ul class="pagination d-flex flex-wrap justify-content-center">
+            @{
+                string prevState = "disabled";
+                string nextState = "disabled";
+                if (ViewBag.currentPage > 1)
+                {
+                    prevState = "active";
+                }
+
+                if (ViewBag.currentPage < ViewBag.Allpages)
+                {
+                    nextState = "active";
+                }
+            }
+
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+          
+
+                <li class="page-item @prevState ">
+                    <a class="page-link page-link-prev"
+                   aria-label="Previous"
+                   tabindex="-1"
+                   aria-disabled="true"
+                   asp-controller="home"
+                   asp-action="search"
+                      asp-route-str="@ViewBag.str"
+ asp-route-page="@(ViewBag.currentPage-1)">
+                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                    </a>
+                </li>
+
+          
+
+            @if (ViewBag.Allpages != null)
+            {
+
+                @for (var i = 1; i <= ViewBag.Allpages; i++)
+                {
+                  
+
+                        if (i == @ViewBag.currentPage)
+                        {
+
+
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link"
+                  asp-controller="home"
+                   asp-action="search"
+                    asp-route-str="@ViewBag.str"
+  asp-route-page="@i">@i</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link"
+                  asp-controller="home"
+                   asp-action="search"
+                     asp-route-str="@ViewBag.str"
+ asp-route-page="@i">@i</a>
+                            </li>
+                        }
+                    }
+             
+
+
+
+            }
+            <li class="page-item-total">of @ViewBag.Allpages</li>
+
+
+
+
+
+
+
+            @*NEXT BUTTON!!!!!!!!!!!!!!!!!!!!!!!*@
+            @*NEXT BUTTON!!!!!!!!!!!!!!!!!!!!!!!*@
+           
+                <li class="page-item @nextState">
+                    <a class="page-link page-link-next" aria-label="Next"
+                   asp-controller="home"
+                   asp-action="search"
+    asp-route-str="@ViewBag.str"
+asp-route-page="@(ViewBag.currentPage+1)">
+                        Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                    </a>
+                </li>
+
+          
+           
+
+        </ul>
+    </nav>  <!-- ad list page navigation -->
+</div>
+
+</div><!---------end main-->
+ <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>

@@ -1,0 +1,36 @@
+﻿
+
+.container .active-ads {
+    background-color: white;
+    padding: 10px;
+}
+
+
+
+    .container .active-ads .crud {
+        list-style: none;
+    }
+
+
+        .container .active-ads .crud li {
+            display: inline;
+            margin-left: 2px;
+        }
+
+        .container .active-ads .crud .delete {
+            color: red;
+        }
+
+.ad-img {
+    margin-right: 10px;
+}
+
+
+.statistics {
+    list-style: none;
+}
+
+    .statistics li {
+        display: inline-block;
+        margin-left: 20px;
+    }

@@ -1,0 +1,357 @@
+﻿@model List<Ad>
+@{
+    ViewData["Title"] = "Category";
+    bool hasfav= ViewBag.favs != null ? true : false;
+    List<int> favorites = ViewBag.favs;
+}
+
+
+<style>
+    .product-media > a{
+        background-color: white;
+    }
+
+
+    .product-media img{
+        width: 60%;
+        max-width: 300px;
+        margin: auto;
+    }
+
+
+</style>
+
+
+
+
+<div class="page-wrapper">
+
+    <!-------------------------------------------------------------------------------------->
+
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('../../assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">@ViewBag.categoryname</h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+
+        <br /><br />
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Filters</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+
+                        <form>
+                            @*asp-action="Filter"*@
+                            <div class="modal-body">
+                                <div style="min-height:40px;" class="input-group mb-1  p-2">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text mb-2" for="inputGroupSelect01">Brands</label>
+                                    </div>
+                                    <select asp-items="@ViewBag.brandlist"
+                                            style="min-height:40px;" di name="BrandId" class="custom-select mb-2"
+                                            id="inputGroupSelect01">
+                                     
+                                    </select>
+                                    <div class="m-2">
+                                         <input type="checkbox" name="getAllBrands" id="getAllBrands"   />
+                                        <label class=" text-primary" for="getAllBrands" > Get All Available Brands</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col mx-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Price From</span>
+                                            </div>
+                                            <input type="text" name="p1"
+                                                   class="form-control" value="0">
+                                        </div>
+
+                                       
+                                        <div class="input-group mb-3 col mx-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">To</span>
+                                            </div>
+                                            <input type="text" name="p2"
+                                                   class="form-control" value="1000000">
+                                        </div>
+                                        <input type="hidden" name="id"
+                                               class="form-control" value="@ViewBag.categoryid">
+                                    </div>
+                                    <input type="hidden" name="name"
+                                           class="form-control" value="@ViewBag.categoryname">
+                                    <input type="hidden" name="page"
+                                           class="form-control" value="1">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100">Search</button>
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+</div>
+
+<br />
+<br />
+<div class="container">
+
+    @foreach (var item in @Model)
+    {
+
+                <div class="products mb-3">
+                    <div class="product product-list">
+                        <div class="row">
+                            <div class="col">
+                                <figure class="product-media">
+                                    <a asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId">
+                                        <img src="@item.AdMainImage" alt="Product image" class="product-image"/>
+                                    </a>
+                                </figure><!-- End .product-media -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+
+                            <div class="col">
+                                <div class="product-body product-action-inner">
+                                    @if (hasfav)
+                                    {
+                                        if (favorites.Contains(item.AdId))
+                                        {
+                                         <a onclick="AddToFavourit(this,@item.AdId)" style="color:red;cursor:pointer; position: absolute; top: 3.4rem;  right: 1rem;"   title="Add to wishlist"><i  class="fa-solid fa-heart mt-2"></i></a>
+                                        }else
+                                        {
+                                         <a onclick="AddToFavourit(this,@item.AdId)" style="cursor:pointer; position: absolute; top: 3.4rem;  right: 1rem;"  title="Add to wishlist"><i class="fa-solid fa-heart mt-2"></i></a>
+                                        }
+                                    }else
+                                    {
+                                       <a onclick="AddToFavourit(this,@item.AdId)" style="cursor:pointer; position: absolute; top: 3.4rem;  right: 1rem;"  title="Add to wishlist"><i class="fa-solid fa-heart mt-2"></i></a>
+                                    }
+                                    <div class="product-cat">
+                                        <a href="#">@item._Category.CategoryName</a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title mr-5"> <a asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId">@item.AdTitle</a></h3><!-- End .product-title -->
+                                    <div class="product-price">$@item.AdPrice</div><!-- End .product-price -->
+
+                                </div><!-- End .product-body -->
+                            </div><!-- End .col-lg-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product -->
+              
+        </div>
+
+        <!-- End .row -->
+    }
+</div>
+
+<div class="col-md-12">
+    <nav aria-label="Page navigation">
+        <ul class="pagination d-flex flex-wrap justify-content-center">
+            @{
+                string prevState = "disabled";
+                string nextState = "disabled";
+                if (ViewBag.currentPage > 1)
+                {
+                    prevState = "active";
+                }
+
+                if (ViewBag.currentPage < ViewBag.Allpages)
+                {
+                    nextState = "active";
+                }
+            }
+
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+            @*PREV BUTTON !!!!!!!!!!!!!!!!!!*@
+            @if (ViewBag.BrandId == null)
+            {
+                @* Filter is NOT applied *@
+
+                <li class="page-item @prevState ">
+                    <a class="page-link page-link-prev"
+                   aria-label="Previous"
+                   tabindex="-1"
+                   aria-disabled="true"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.CategoryId"
+                   asp-route-name="@ViewBag.CategoryName"
+                   asp-route-getAllBrands="off"
+                   asp-route-page="@(ViewBag.currentPage-1)">
+                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                    </a>
+                </li>
+
+            }
+            else
+            {
+
+                @* Filter is applied *@
+
+                <li class="page-item @prevState ">
+                    <a class="page-link page-link-prev"
+                   aria-label="Previous" tabindex="-1" aria-disabled="true"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.categoryid"
+                   asp-route-name="@ViewBag.categoryname"
+                   asp-route-BrandId="@ViewBag.BrandId"
+                   asp-route-getAllBrands="@ViewBag.getAllBrands"
+                   asp-route-p1="@ViewBag.p1"
+                   asp-route-p2="@ViewBag.p2"
+                   asp-route-page="@(ViewBag.currentPage-1)">
+                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                    </a>
+                </li>
+
+            }
+
+            @if (ViewBag.Allpages != null)
+            {
+
+                @for (var i = 1; i <= ViewBag.Allpages; i++)
+                {
+                    if (ViewBag.BrandId == null)
+                    {
+                        @* Filter is NOT applied *@
+
+                        if (i == @ViewBag.currentPage)
+                        {
+
+
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.CategoryId"
+                   asp-route-name="@ViewBag.CategoryName"
+                    asp-route-getAllBrands="off"
+                  asp-route-page="@i">@i</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.CategoryId"
+                   asp-route-name="@ViewBag.CategoryName"
+                    asp-route-getAllBrands="off"
+                  asp-route-page="@i">@i</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        @*   Filter is Applied Here *@
+
+                        if (i == @ViewBag.currentPage)
+                        {
+
+
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" asp-controller="categorylist" asp-action="Index"
+                   asp-route-id="@ViewBag.categoryid"
+                   asp-route-name="@ViewBag.categoryname"
+                   asp-route-BrandId="@ViewBag.BrandId"
+                   asp-route-p1="@ViewBag.p1"
+                   asp-route-p2="@ViewBag.p2"
+                                asp-route-getAllBrands="@ViewBag.getAllBrands"
+      asp-route-page="@i">@i</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.categoryid"
+                   asp-route-name="@ViewBag.categoryname"
+                   asp-route-BrandId="@ViewBag.BrandId"
+                   asp-route-p1="@ViewBag.p1"
+                   asp-route-p2="@ViewBag.p2"
+                   asp-route-getAllBrands="@ViewBag.getAllBrands"
+     asp-route-page="@i">@i</a>
+                            </li>
+
+                        }
+                    }
+
+                }
+
+
+            }
+            <li class="page-item-total">of @ViewBag.Allpages</li>
+
+
+
+
+
+
+
+            @*NEXT BUTTON!!!!!!!!!!!!!!!!!!!!!!!*@
+            @*NEXT BUTTON!!!!!!!!!!!!!!!!!!!!!!!*@
+            @if (ViewBag.BrandId == null)
+            {
+                @* Filter is NOT applied *@
+                <li class="page-item @nextState">
+                    <a class="page-link page-link-next" aria-label="Next"
+                   asp-controller="categorylist"
+                   asp-action="Index"
+                   asp-route-id="@ViewBag.CategoryId"
+                   asp-route-name="@ViewBag.CategoryName"
+                                     asp-route-getAllBrands="off"
+  asp-route-page="@(ViewBag.currentPage+1)">
+                        Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                @* Filter is applied *@
+
+
+                <li class="page-item @nextState">
+                    <a class="page-link page-link-next"
+                   aria-label="Next"
+                   asp-controller="categorylist" asp-action="Index"
+                   asp-route-id="@ViewBag.categoryid"
+                   asp-route-name="@ViewBag.categoryname"
+                   asp-route-BrandId="@ViewBag.BrandId"
+                   asp-route-p1="@ViewBag.p1"
+                   asp-route-p2="@ViewBag.p2"
+                                    asp-route-getAllBrands="@ViewBag.getAllBrands"
+  asp-route-page="@(ViewBag.currentPage+1)">
+                        Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                    </a>
+                </li>
+
+            }
+
+        </ul>
+    </nav>  <!-- ad list page navigation -->
+</div>
+
+        </main><!-- End .main -->
+    </div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+@section Scripts{
+    <script src="~/js/AddtoFavourit.js"></script>
+    <script src="~/js/CategoryList.js"></script>
+}

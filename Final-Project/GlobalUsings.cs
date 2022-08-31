@@ -1,0 +1,10 @@
+﻿global using Final_Project.Models;
+global using Final_Project.Services.BrandServiceFolder;
+global using Final_Project.Services.CategoryServiceFolder;
+global using Final_Project.Services.FavoriteServiceFolder;
+global using Final_Project.Services.ProductImageServiceFolder;
+global using Final_Project.Services.ProductsServiceFolder;
+global using Final_Project.Services.QuestionServiceFolder;
+global using Final_Project.Services.UserServiceFolder;
+global using Final_Project.Services.SubCategoryServiceFolder;
+global using Final_Project.Data;

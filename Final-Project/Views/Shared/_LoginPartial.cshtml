@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<div class="row">
+@if (SignInManager.IsSignedIn(User))
+{
+    <!-- Example single danger button -->
+<div class="btn-group  col">
+    
+  <a type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img class="mx-1" src="~/assets/images/icons/user.png" height="24px" width="24px">
+     @UserManager.GetUserAsync(User).Result.FullName
+  </a>
+  <div class="dropdown-menu">
+          <a id="manage" class="nav-link col" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="fs-lg">Welcome, @UserManager.GetUserAsync(User).Result.FullName</span></a>
+    <a class="dropdown-item" href="~/dashboard">View Ads</a>
+    <a class="dropdown-item" href="~/wishlist">Favorites</a>
+    @if (User.IsInRole("Admin"))
+{
+ <a href="~/admin" class="btn btn-danger w-100">
+     Admin
+ </a>
+    
+}
+    <div class="dropdown-divider"></div>
+     
+<form id="logoutForm" class="form-inline col" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class=" btn btn-link w-100">Logout</button>
+        </form> 
+        </div>
+</div>
+
+
+         @* <a id="manage" class="nav-link col" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="fs-lg">Welcome @UserManager.GetUserAsync(User).Result.FullName</span></a>
+        <form id="logoutForm" class="form-inline col" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class=" btn btn-link">Logout</button>
+        </form> *@
+}
+else
+{
+   
+
+          <a class="nav-link col " id="register" asp-area="Identity" asp-page="/Account/Register"><span class="fs-lg">Register</span></a>
+        <a class="nav-link col" id="login" asp-area="Identity" asp-page="/Account/Login"><span class="fs-lg">Login</span></a>
+
+          
+
+  }
+              <a id="add-ad" class="col text-center justify-content-center align-self-center" href="~/ads/createAd" title="">
+                  <img src="~/assets/images/icons/add_ad_48.png" width="24px" height="24px"/>
+              </a>
+  </div>
+

@@ -1,0 +1,238 @@
+﻿
+@model AdVm
+@{
+    ViewData["Title"] = "Product Details";
+    
+}
+
+
+
+ <div class="page-wrapper mt-2">
+       
+     
+        <main class="main">
+            
+
+            <div class="page-content">
+                <div class="container">
+                    <div class="product-details-top">
+                        <div class="row">
+
+                            <div class="col-md-6 align-items-center">
+                                <div class="product-gallery product-gallery-vertical ">
+                                    <div class="row">
+                                        <figure class="product-main-image align-item-start">
+                                            <img id="product-zoom" src="@Model.ad.AdMainImage" data-zoom-image="assets/images/products/single/1-big.jpg" alt="product image" style="height:400px;">
+                                            
+                                        </figure><!-- End .product-main-image -->
+
+
+                                       
+
+                                    </div><!-- End .row -->.
+                                </div><!-- End .product-gallery -->
+                            </div><!-- End .col-md-6 -->
+
+
+                            <div class="col-md-4">
+
+                            
+
+                                <div class="product-details">
+                                    <h1 class="product-title">@Model.ad.AdTitle</h1><!-- End .product-title -->
+
+                                  
+
+                                    <div class="product-price">
+                                        $@Model.ad.AdPrice
+                                    </div><!-- End .product-price -->
+
+                                    <div class="product-content">
+                                        <p>@Model.ad.AdBrief</p>
+                                    </div><!-- End .product-content -->
+
+                                    
+   <div class="product-details-action">
+       <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="PhoneRequestd(@Model.ad.AdId)" data-bs-target="#exampleModal">
+  show phone number
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">phone number</h5>
+      </div>
+       <br />
+      <div class="modal-body d-flex justify-content-center">
+       <h1>@Model.ad._Seller.Phone</h1>   
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+ 
+                                        <div class="details-action-wrapper">
+                                         @if (ViewBag.infav==true)
+                                        {
+                                           <a style="color:red" onclick="AddToFavourit(this,@Model.ad.AdId)"  title="Wishlist">
+                                                    <i style="font-size:16px;cursor:pointer" class="fa-solid fa-heart"></i>
+                                            </a>
+                                        }else
+                                        {
+                                            <a  onclick="AddToFavourit(this,@Model.ad.AdId)"  title="Wishlist">
+                                                    <i style="font-size:16px;cursor:pointer" class="fa-solid fa-heart"></i>
+                                            </a>
+                                        }
+                                    </div><!-- End .details-action-wrapper -->
+                                    </div><!-- End .product-details-action -->
+
+                                    <div class="product-details-footer">
+                                        <div class="product-cat">
+                                            <span>Category:</span>
+                                            <a asp-controller="home" asp-action="catlist" asp-route-cat="@Model.ad._Category.CategoryId" asp-route-catname="@Model.ad._Category.CategoryName">@Model.ad._Category.CategoryName</a>
+                                            
+    
+                 
+                                            
+                                        </div><!-- End .product-cat -->
+                                                                                               
+                              
+                                    </div><!-- End .product-details-footer -->
+
+                                </div><!-- End .product-details -->
+                                @if (User.IsInRole("Admin"))
+{
+ <a asp-controller="ads" asp-action="remove" asp-route-AdId="@Model.ad.AdId" class="btn btn-danger">
+     Remove
+ </a>
+    
+}
+         
+                            </div><!-- End .col-md-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+
+                    <div class="product-details-tab">
+                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                                <div class="product-desc-content">
+                                    <h3>Description</h3>
+                                    <p>@Model.ad.AdDescription</p>
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                                <div class="product-desc-content">
+                                    <h3>Information</h3>
+                                   
+                                   <p>@Model.ad.AdDescription</p>
+                                    
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->                         
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .product-details-tab -->
+
+                    <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+
+                    <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" 
+                        data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+                    @foreach(var item in Model.ads)
+                    {
+                         <div class="product product-7 text-center" >
+                            <figure class="product-media" >
+
+                                
+                       
+
+                                
+                                <a  asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId" style="height:300px;">
+                                    <img src="@item.AdMainImage" alt="Product image" class="product-image" style="height:300px;">
+
+                                </a>
+
+                                <div class="product-action-vertical">
+                                    <a  onclick="AddToFavourit(this,@item.AdId)" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                    
+                                    
+                                </div><!-- End .product-action-vertical -->
+
+                                <div class="product-action">
+                                    
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a asp-controller="home" asp-action="catlist" asp-route-cat="@item._Category.CategoryId" asp-route-catname="@item._Category.CategoryName">@item._Category.CategoryName</a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a   asp-controller="ads" asp-action="index" asp-route-AdId="@item.AdId">@item.AdTitle</a></h3><!-- End .product-title -->
+                                <div class="product-price">
+                                    $@item.AdPrice
+                                </div><!-- End .product-price -->
+                                
+
+                               
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                    }
+
+              
+                        
+                       
+                    </div><!-- End .owl-carousel -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+       
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+
+
+
+@section Scripts{
+    <script src="~/js/PhoneRquested.js"></script>
+    <script src="~/js/AddtoFavourit.js"></script>
+}

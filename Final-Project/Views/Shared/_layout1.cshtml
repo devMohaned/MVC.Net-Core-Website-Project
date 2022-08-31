@@ -1,0 +1,347 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/icons/site.html">
+    <link rel="mask-icon" href="~/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="~/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="~/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="~/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/jquery.countdown.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="~/assets/css/skins/skin-demo-3.css">
+    <link rel="stylesheet" href="~/assets/css/demos/demo-3.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <style>
+
+        @@media screen and (max-width: 991px) {
+            .mobile-search-response {
+                display: block !important;
+            }
+
+            .d-991 {
+                display: block !important;
+            }
+        }
+
+        @@media screen and (min-width: 991px) {
+            .mobile-search-response {
+                display: none !important;
+            }
+
+            .d-991 {
+                display: none !important;
+            }
+        }
+
+        .page-header .page-header-big-xxx {
+            margin-bottom: 24px !important;
+            padding: 4.6rem 0 5rem;
+            background-color: #ebebeb;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+       
+
+    </style>
+
+
+    @RenderSection("css",false)
+</head>
+<body>
+
+    <div class="page-wrapper" style="min-height:auto">
+        <header class="header header-intro-clearance header-3">
+            <div class="header-top"></div>
+            <!-- End .header-top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left">
+
+
+                        <a href="~/" class="logo">
+                            <img src="~/assets/images/demos/demo-3/logo.png"
+                                 alt="Molla Logo"
+                                 width="105"
+                                 height="25" />
+
+                        </a>
+
+
+                        @*</a href="~/" class="logo">
+                        <img
+                        src="~/assets/images/logo2.png"
+                        alt="Molla Logo"
+                        width="105"
+                        height="20px"
+                        style="background-color: yellow"
+                        />
+                        <a>*@
+
+
+                    </div>
+                    <!-- End .header-left -->
+
+                    <div class="header-center">
+                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                            <a href="#" class="search-toggle" role="button">
+                                <i class="icon-search"></i>
+                            </a>
+                            <form action="/Home/search" method="get">
+                                <div class="header-search-wrapper search-wrapper-wide">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="icon-search"></i>
+                                    </button>
+                                    <input class="form-control"
+                                           name="str"
+                                           id="q"
+                                           placeholder="Search product ..."
+                                           required />
+                                </div>
+                                <!-- End .header-search-wrapper -->
+                            </form>
+                        </div>
+                        <!-- End .header-search -->
+                    </div>
+
+                    <div class="header-right">
+
+                        @*     <ul class="top-menu">
+                        <li>
+                        <a href="#">Signing</a>
+                        <ul>
+                        <li>
+                        <a href="#signin-modal" data-toggle="modal"
+                        >Sign in / Sign up</a
+                        >
+                        </li>
+
+                        </ul>
+                        </li>
+                        </ul>*@
+                        <partial name="_LoginPartial" style="color:white" />
+
+
+
+                    </div>
+                    <!-- End .header-right -->
+                </div>
+                <!-- End .container -->
+            </div>
+            <!-- End .header-middle -->
+            @*    <div id="navigationBarCategory" class="header-bottom sticky-header d-flex">
+            <div class="header-left">
+            <div class="dropdown category-dropdown">
+            <a
+            href="#"
+            class="dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-display="static"
+            title="Browse Categories"
+            >
+            Browse Categories <i class="icon-angle-down"></i>
+            </a>
+            <div class="dropdown-menu">
+            <nav class="side-nav">
+            <ul class="menu-vertical sf-arrows">
+            <li class="item-lead"><a href="#">Daily offers</a></li>
+            <li class="item-lead"><a href="#">Gift Ideas</a></li>
+            <li><a href="#">Beds</a></li>
+            <li><a href="#">Lighting</a></li>
+            <li><a href="#">Sofas & Sleeper sofas</a></li>
+            <li><a href="#">Storage</a></li>
+            <li><a href="#">Armchairs & Chaises</a></li>
+            <li><a href="#">Decoration </a></li>
+            <li><a href="#">Kitchen Cabinets</a></li>
+            <li><a href="#">Coffee & Tables</a></li>
+            <li><a href="#">Outdoor Furniture </a></li>
+            </ul>
+            <!-- End .menu-vertical -->
+            </nav>
+            <!-- End .side-nav -->
+            </div>
+            <!-- End .dropdown-menu -->
+            </div>
+            <!-- End .category-dropdown -->
+            </div>
+            <!-- End .header-left -->
+            </div>
+            <!-- End .header-bottom -->*@
+        </header>
+        <!--  End Header-->
+    </div>
+
+
+    <!-- Mobile Responsive Search Bar-->
+    <div class="page-header page-header-big-xxx text-center d-991 mb-2"
+         style="background-image: url('../../assets/images/backgrounds/search_bg.jpg');">
+
+        <form class="mx-5 my-1 mobile-search-response d-flex justify-content-center"
+        asp-controller="home" asp-action="search" method="get">
+            <div class="input-group md-form form-sm form-1 pl-0">
+                <div class="input-group-prepend">
+                    <label for="q" class="sr-only">Search</label>
+                    <button asp-controller="home" asp-action="search" 
+                    class="bg-primary border borderless border-0 px-4 rounded" type="submit">
+                            <i class="icon-search"></i>
+                    </button>
+                </div>
+                <input class="form-control "
+                       name="str"
+                       id="q"
+                       placeholder="Search product ..."
+                       required
+                       style="min-width:150px;">
+            </div>
+        </form>
+
+
+
+    </div>
+    <!-- End .page-header -->
+
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget widget-about">
+                            <img src="~/assets/images/demos/demo-3/logo-footer.png"
+                                 class="footer-logo"
+                                 alt="Footer Logo"
+                                 width="105"
+                                 height="25" />
+                            <p>
+                                We allow users to sell used products through us
+                            </p>
+                        </div>
+                        <!-- End .widget about-widget -->
+                    </div>
+                    <!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-7 col-lg-3">
+                        <div class="widget">
+                            <ul class="widget-list"></ul>
+                            <!-- End .widget-list -->
+                        </div>
+                        <!-- End .widget -->
+                    </div>
+                    <!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget">
+                            <h4 class="widget-title">Customer Service</h4>
+                            <!-- End .widget-title -->
+
+                            <ul class="widget-list">
+                                <li><a href="~/about">About Molla</a></li>
+                                <li><a href="~/faq">FAQ</a></li>
+                                <li><a href="~/contact">Contact us</a></li>
+                            </ul>
+                            <!-- End .widget-list -->
+                        </div>
+                        <!-- End .widget -->
+                    </div>
+                    <!-- End .col-sm-6 col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget">
+                            <h4 class="widget-title">My Account</h4>
+                            <!-- End .widget-title -->
+
+                            <ul class="widget-list">
+                                <li><a href="~/wishlist">Favorites</a></li>
+                            </ul>
+                            <!-- End .widget-list -->
+                        </div>
+                        <!-- End .widget -->
+                    </div>
+                    <!-- End .col-sm-6 col-lg-3 -->
+                </div>
+                <!-- End .row -->
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End .footer-middle -->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="footer-copyright">
+                    Copyright © 2022 Molla Store. All Rights Reserved.
+                </p>
+                <!-- End .footer-copyright -->
+            </div>
+            <!-- End .container -->
+        </div>
+        <!-- End .footer-bottom -->
+    </footer>
+    <!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+
+
+
+
+
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="~/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/assets/js/superfish.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/bootstrap-input-spinner.js"></script>
+    <script src="~/assets/js/jquery.plugin.min.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/jquery.countdown.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/demos/demo-3.js"></script>
+    <script src="https://kit.fontawesome.com/7fd670cbbb.js" crossorigin="anonymous"></script>
+    @RenderSection("script",false)
+    @RenderSection("Scripts",false)
+</body>
+</html>
